@@ -14,8 +14,12 @@ public class Main {
     Parser parser = new Parser();
     Map<String, Object> options = parser.parse(args);
     if (options != null) {
-      int length = ((Number) options.getOrDefault("l", 6)).intValue();
-      System.out.println(dw.generate(length, " "));
+      if (options.containsKey("g")) {
+        int length = ((Number) options.getOrDefault("l", 6)).intValue();
+        System.out.println(dw.generate(length, " "));
+      } else {
+        System.out.println(options);
+      }
     }
   }
 

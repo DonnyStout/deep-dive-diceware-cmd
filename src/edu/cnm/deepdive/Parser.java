@@ -19,7 +19,7 @@ public class Parser {
     Option option = Option.builder("l")
                           .longOpt("length")
                           .hasArg(true)
-                          .argName("length")
+                          .argName("words")
                           .numberOfArgs(1)
                           .optionalArg(false)
                           .required(false)
@@ -33,6 +33,80 @@ public class Parser {
                    .required(false)
                    .desc("display usage")
                    .build();
+    options.addOption(option);
+    option = Option.builder("c")
+                   .longOpt("command")
+                   .hasArg(true)
+                   .argName("operation")
+                   .numberOfArgs(1)
+                   .optionalArg(false)
+                   .required(false)
+                   .type(String.class)
+                   .desc("operation to perform")
+                   .build();
+    options.addOption(option);
+    option = Option.builder("f")
+        .longOpt("for")
+        .hasArg(true)
+        .argName("identifier")
+        .numberOfArgs(1)
+        .optionalArg(false)
+        .required(false)
+        .type(String.class)
+        .desc("unique identifier")
+        .build();
+    options.addOption(option);
+    option = Option.builder("u")
+        .longOpt("user")
+        .hasArg(true)
+        .argName("username or id")
+        .numberOfArgs(1)
+        .optionalArg(false)
+        .required(false)
+        .type(String.class)
+        .desc("username or id of credentials")
+        .build();
+    options.addOption(option);
+    option = Option.builder("p")
+        .longOpt("pass")
+        .hasArg(true)
+        .argName("password/passphrase")
+        .numberOfArgs(1)
+        .optionalArg(false)
+        .required(false)
+        .type(String.class)
+        .desc("password/passphrase for credentials")
+        .build();
+    options.addOption(option);
+    option = Option.builder("g")
+        .longOpt("generate")
+        .hasArg(false)
+        .required(false)
+        .desc("generate random password/passphrase")
+        .build();
+    options.addOption(option);
+    option = Option.builder("i")
+        .longOpt("info")
+        .hasArg(true)
+        .argName("additional information")
+        .numberOfArgs(1)
+        .optionalArg(false)
+        .required(false)
+        .type(String.class)
+        .desc("freeform information (if spaces included entire "
+            + "value must be surrounded in double quotes)")
+        .build();
+    options.addOption(option);
+    option = Option.builder("t")
+        .longOpt("tags")
+        .hasArgs()
+        .argName("category tags")
+        //.optionalArg(true)
+        .numberOfArgs(Option.UNLIMITED_VALUES)
+        .required(false)
+        .type(String.class)
+        .desc("space-delimited list of categories")
+        .build();
     options.addOption(option);
   }
 
@@ -49,7 +123,20 @@ public class Parser {
       Object value = cmd.getParsedOptionValue(option.getOpt());
       optionsSpecified.put(option.getOpt(), value);
     }
+    validate(optionsSpecified);
     return optionsSpecified;
+  }
+
+  private void validate(Map<String, Object> options) {
+    // TODO 
+  }
+
+
+  public static class InvalidOptionCombination extends ParseException{
+
+    public InvalidOptionCombination(String message) {
+      super(message);
+    }
   }
 
 }
