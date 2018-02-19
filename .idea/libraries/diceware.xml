@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="diceware">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/diceware.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/libs/diceware.jar!/doc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../deep-dive-diceware/src" />
+    </SOURCES>
+  </library>
+</component>
